@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+    .sidebar {
+      width: 200px;
+      background-color: #FE2020;
+      padding-top: 30px;
+      height: 100vh;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sidebar button {
+      width: 90%;
+      padding: 15px;
+      margin: 10px 0;
+      font-size: 16px;
+      background-color: white;
+      color: #FE2020;
+      border: 2px solid #FE2020;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .sidebar button:hover {
+      transform: scale(1.05);
+      background-color: #ffdddd;
+    }
+    .content {
+      flex: 1;
+      padding: 30px;
+      background-color: white;
+    }
+    .hidden {
+      display: none;
+    }
+    .sp-wrapper {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .sp-form, .sp-table {
+      width: 50%;
+      background: #fafafa;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .sp-form label {
+      display: block;
+      margin-top: 10px;
+    }
+    .sp-form input, .sp-form select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+    .sp-form .radio-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    .sp-form button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      margin-right: 10px;
+      background: #FE2020;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .sp-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .sp-table th, .sp-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+  </style>
+  <script src="js/admin.js" defer></script>
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.content-section').forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+  </script>
+</head>
+<body>
+  <div class="sidebar">
+    <button onclick="showSection('taoDon')">Tạo đơn hàng offline</button>
+    <button onclick="showSection('quanLySP')">Quản lý sản phẩm</button>
+    <button onclick="showSection('donOnline')">Xem đơn hàng online</button>
+  </div>
+
+  <div class="content">
+    <div id="taoDon" class="content-section">
+      <h2>Tạo đơn hàng offline</h2>
+      <label>ID khách hàng: <input type="number" id="khachHangId" value="1"></label><br>
+      <label>ID sản phẩm chi tiết: <input type="text" id="chiTietSpIds" placeholder="VD: 1,2"></label><br>
+      <label>Số lượng tương ứng: <input type="text" id="soLuongs" placeholder="VD: 1,1"></label><br>
+      <button onclick="taoDonOffline()">Tạo đơn</button>
+      <div id="ketqua"></div>
+    </div>
+
+    <div id="quanLySP" class="content-section hidden">
+      <h2 style="text-align: center;">Quản lý sản phẩm</h2>
+      <div class="sp-wrapper">
+        <div class="sp-form">
+          <h3>Form Thêm / Sửa sản phẩm</h3>
+          <label>ID sản phẩm (để sửa): <input type="number" id="sp_id"></label>
+          <label>Tên SP: <input type="text" id="ten_sp"></label>
+          <label>Chất liệu:
+            <select id="chat_lieu">
+              <option value="">-- Chọn chất liệu --</option>
+            </select>
+          </label>
+          <label>Mô tả: <input type="text" id="mo_ta"></label>
+          <label>Ngày nhập: <input type="date" id="ngay_nhap"></label>
+          <label>Số lượng: <input type="number" id="so_luong"></label>
+          <label>Giá bán: <input type="number" id="gia_ban"></label>
+
+          <label>Trạng thái:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="trang_thai" value="true" checked> Còn</label>
+            <label><input type="radio" name="trang_thai" value="false"> Hết</label>
+          </div>
+          <label>Thương hiệu:
+            <select id="thuong_hieu_id">
+              <option value="">-- Chọn thương hiệu --</option>
+            </select>
+          </label>
+          <label>Kiểu giày:
+            <select id="kieu_giay_id">
+              <option value="">-- Chọn kiểu giày --</option>
+            </select>
+          </label>
+          <label>Xuất xứ:
+            <select id="xuat_xu_id">
+              <option value="">-- Chọn xuất xứ --</option>
+            </select>
+          </label>
+          <label>Thêm ảnh sản phẩm: <input type="file" id="anh_sp"></label>
+
+          <button onclick="themSanPham()">➕ Thêm</button>
+          <button onclick="suaSanPham()">✏️ Sửa</button>
+        </div>
+
+        <div class="sp-table">
+          <h3 style="text-align: center;">Danh sách sản phẩm</h3>
+          <button onclick="laySanPham()" style="margin-bottom: 10px;">Tải danh sách sản phẩm</button>
+          <table id="bangSanPham">
+            <thead>
+              <tr><th>ID</th><th>Tên</th><th>Giá</th><th>Trạng thái</th><th>Thao tác</th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="donOnline" class="content-section hidden">
+      <h2>Đơn hàng khách đặt online</h2>
+      <div id="donOnlineList">(Chưa có dữ liệu - cần viết thêm fetch /dat-hang/all)</div>
+    </div>
+  </div>
+</body>
+</html>

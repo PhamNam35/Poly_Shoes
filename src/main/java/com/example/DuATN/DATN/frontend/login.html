@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập</title>
+  <link rel="stylesheet" href="css/style.css"> <!-- Nếu có style.css -->
+  <script src="js/login.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background-color: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ff4d4f;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #d9363e;
+    }
+
+    .register-link {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .register-link a {
+      color: #ff4d4f;
+      text-decoration: none;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+
+    #ketqua {
+      margin-top: 10px;
+      text-align: center;
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Đăng nhập</h1>
+    <form onsubmit="dangNhap(event)">
+      <label for="username">Tên đăng nhập:</label>
+      <input type="text" id="username" required />
+
+      <label for="password">Mật khẩu:</label>
+      <input type="password" id="password" required />
+
+      <label for="vaiTro">Vai trò:</label>
+      <select id="vaiTro">
+        <option value="khach">Khách hàng</option>
+        <option value="nhanvien">Nhân viên</option>
+      </select>
+
+      <button type="submit">Đăng nhập</button>
+    </form>
+
+    <div class="register-link">
+      Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
+    </div>
+
+    <div id="ketqua"></div>
+  </div>
+</body>
+</html>

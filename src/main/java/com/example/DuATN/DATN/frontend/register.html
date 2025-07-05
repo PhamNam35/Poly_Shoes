@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Đăng ký tài khoản</title>
+  <script src="js/register.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 30px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #FE2020;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #FE2020;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d41919;
+    }
+
+    #thongbao {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .back-link a {
+      color: #FE2020;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Đăng ký tài khoản</h2>
+    <form onsubmit="dangKy(event)">
+      <label>Họ tên:</label>
+      <input type="text" id="hoTen" required>
+
+      <label>Tên đăng nhập:</label>
+      <input type="text" id="username" required>
+
+      <label>Mật khẩu:</label>
+      <input type="password" id="password" required>
+
+      <label>Vai trò:</label>
+      <select id="vaiTro" required>
+        <option value="khach">Khách hàng</option>
+        <option value="nhanvien">Nhân viên</option>
+      </select>
+
+      <button type="submit">Đăng ký</button>
+    </form>
+
+    <div id="thongbao"></div>
+
+    <div class="back-link">
+      <p>Đã có tài khoản? <a href="login.html">Đăng nhập ngay</a></p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Shoe Store</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/index.js" defer></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background-color: #FE2020;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .header-left h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .search-box input {
+      padding: 8px;
+      border-radius: 4px;
+      border: none;
+      width: 250px;
+    }
+
+    .search-box button {
+      padding: 8px 12px;
+      border: none;
+      background: white;
+      color: #FE2020;
+      border-radius: 6px;
+      margin-left: 8px;
+      cursor: pointer;
+    }
+
+    .header-right button {
+      background-color: white;
+      color: #FE2020;
+      border: none;
+      padding: 8px 12px;
+      margin-left: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .filter-bar {
+      background: white;
+      padding: 10px 20px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .filter-bar select {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 6px;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 30px 20px;
+    }
+
+    .card {
+      width: 230px;
+      min-height: 420px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 16px;
+    }
+
+    .card p {
+      color: #d9363e;
+      font-weight: bold;
+      margin: 5px 0 10px;
+    }
+
+    .card-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 10px 12px;
+    }
+
+    .card-buttons button {
+      padding: 6px;
+      font-size: 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+
+    .btn-detail {
+      width: 100%;
+      background-color: #888;
+      color: white;
+      border: none;
+      margin-bottom: 8px;
+    }
+
+    .btn-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .btn-cart {
+      flex: 1;
+      background-color: white;
+      color: #FE2020;
+      border: 1px solid #FE2020;
+    }
+
+    .btn-buy {
+      flex: 1;
+      background-color: #FE2020;
+      color: white;
+      border: none;
+    }
+
+    .pagination {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .pagination button {
+      background-color: white;
+      color: #FE2020;
+      border: 1px solid #FE2020;
+      margin: 3px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .pagination button:hover {
+      background-color: #FE2020;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔴 Header -->
+  <header>
+  <div class="header-left">
+    <h1 style="display: inline-block; margin-right: 10px;">Shoe Store</h1>
+    <button onclick="window.location.href='index.html'">🏠 Trang chủ</button>
+  </div>
+
+  <div class="search-box">
+    <input type="text" id="timKiemTen" placeholder="Tìm sản phẩm...">
+    <button onclick="locSanPham()">Tìm kiếm</button>
+  </div>
+
+  <div class="header-right" id="auth-area">
+    <!-- Tự động cập nhật sau đăng nhập -->
+    <button onclick="window.location.href='login.html'">Đăng nhập</button>
+    <button onclick="window.location.href='dathang.html'">Giỏ hàng</button>
+  </div>
+</header>
+
+
+  <!-- 🔽 Lọc -->
+  <div class="filter-bar">
+    <select id="locThuongHieu" onchange="locSanPham()">
+      <option value="">-- Thương hiệu --</option>
+      <option value="Nike">Nike</option>
+      <option value="Adidas">Adidas</option>
+    </select>
+
+    <select id="locKieuGiay" onchange="locSanPham()">
+      <option value="">-- Kiểu giày --</option>
+      <option value="Sneaker">Sneaker</option>
+      <option value="Boot">Boot</option>
+    </select>
+
+    <select id="locGia" onchange="locSanPham()">
+      <option value="">-- Giá --</option>
+      <option value="duoi1tr">Dưới 1 triệu</option>
+      <option value="1-2tr">1 - 2 triệu</option>
+      <option value="tren2tr">Trên 2 triệu</option>
+    </select>
+
+    <select id="locSize" onchange="locSanPham()">
+      <option value="">-- Size --</option>
+      <option value="38">38</option>
+      <option value="39">39</option>
+      <option value="40">40</option>
+      <option value="41">41</option>
+      <option value="42">42</option>
+    </select>
+  </div>
+
+  <!-- 📦 Danh sách sản phẩm -->
+  <div id="danhSachSanPham" class="product-grid"></div>
+
+  <!-- 🔢 Phân trang -->
+  <div id="phanTrang" class="pagination"></div>
+
+</body>
+</html>

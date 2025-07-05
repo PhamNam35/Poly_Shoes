@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Đặt Hàng</title>
+  <script src="js/dathang.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .order-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ff4d4f;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #ff4d4f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #d9363e;
+    }
+
+    #thongbao {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="order-container">
+    <h2>Đặt Hàng Không Cần Đăng Nhập</h2>
+
+    <label>Họ tên người nhận:</label>
+    <input type="text" id="hoTen" required>
+
+    <label>Số điện thoại:</label>
+    <input type="text" id="soDienThoai" required>
+
+    <label>Địa chỉ giao hàng:</label>
+    <input type="text" id="diaChi" required>
+
+    <button onclick="datHangKhachAnDanh()">Đặt hàng</button>
+
+    <div id="thongbao"></div>
+  </div>
+</body>
+</html>
